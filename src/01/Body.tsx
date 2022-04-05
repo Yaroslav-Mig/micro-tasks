@@ -53,7 +53,8 @@ export const Body = (props: BodyProps) => {
   return (
     <div>
       <span>{props.title}</span>
-      <Students students={students} cars={topCars} />
+			<Students students={students} cars={topCars} />
+			<hr/>
       <Currency money={filteredMoney} setFilter={setFilter} />
     </div>
   );

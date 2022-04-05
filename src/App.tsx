@@ -5,6 +5,7 @@ import { Body } from './01/Body';
 import { Footer } from './01/Footer';
 import { Button } from './01/Button';
 import { UseState } from './01/UseState';
+import { Input } from './02/Input';
 
 function App() {
 
@@ -19,12 +20,18 @@ function App() {
 
   return (
     <div className='App'>
-      <Header title='Hello world' />
-      <Body title='Body' />
-      <Footer title='Footer' />
+			<Header title='Hello world' />
+			<hr/>
+			<Body title='Body' />
+			<hr/>
+			<Footer title='Footer' />
+			<hr/>
 			<Button name={'Btn1'} callBack={() => BtnFunc_1('Yar', 21)}/>
 			<Button name={'Btn2'} callBack={() => BtnFunc_2('Alex', 31)} />
-			<UseState/>
+			<hr/>
+			<UseState />
+			<hr/>
+			<Input/>
     </div>
   );
 }

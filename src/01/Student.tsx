@@ -52,7 +52,8 @@ export const Students = (props: StudentsProps) => {
 
   return (
     <>
-      <ul>{studentsList}</ul>
+			<ul>{studentsList}</ul>
+			<hr/>
       <table style={CarsStyle}>
         <thead>
           <tr>
