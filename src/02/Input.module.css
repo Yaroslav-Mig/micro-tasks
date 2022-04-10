@@ -1,0 +1,7 @@
+.input_error {
+  border: 1px solid #ff4500;
+  outline: none;
+}
+.message_error {
+  color: #ff4500;
+}
