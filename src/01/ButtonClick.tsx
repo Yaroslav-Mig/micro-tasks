@@ -5,7 +5,7 @@ type ButtonProps = {
   callBack: () => void;
 };
 
-export const Button = ({ name, callBack }: ButtonProps) => {
+export const ButtonClick = ({ name, callBack }: ButtonProps) => {
   const onBtnHandler = (e: MouseEvent<HTMLButtonElement>) => {
     console.log('Hello Vas');
   };
