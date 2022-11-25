@@ -8,6 +8,7 @@ import { UseState } from './01/UseState';
 import { FullInput, MessagesType } from './02/FullInput';
 import { Input } from './02/Input';
 import { Button } from './02/Button';
+import AppTodoList from './03/AppTodoList';
 
 function App() {
   const [messages, setMessages] = useState<Array<MessagesType>>([
@@ -69,7 +70,9 @@ function App() {
       <hr />
       <Input value={title} onChange={setTitle} />
       <Button name={'+'} addMessage={onClickBtnHandler} />
-      <div>{mappedMessages2}</div>
+			<div>{mappedMessages2}</div>
+			<hr />
+			<AppTodoList/>
     </div>
   );
 }
