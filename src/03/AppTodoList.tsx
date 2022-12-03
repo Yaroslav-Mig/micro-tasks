@@ -29,8 +29,8 @@ const getFilteredTasks = (tasks: TaskType[], filter: FilterValuesType): TaskType
       return tasks.filter((task) => task.isDone === false);
 
     case 'completed':
-			return tasks.filter((task) => task.isDone === true);
-		
+      return tasks.filter((task) => task.isDone === true);
+
     default:
       return tasks;
   }
@@ -74,10 +74,17 @@ const AppTodoList = (): JSX.Element | null => {
     setTasks({ ...tasks, [todoListID]: [] });
   };
 
-  function changeTodoListFilter(id: string, filter: FilterValuesType) {
+  const removeTodoList = (id: string): void => {
+    const filteredTodoLists = todoLists.filter((tl) => tl.id !== id);
+    setTodoLists(filteredTodoLists);
+    const { [id]: removeTask, ...restTasks } = tasks;
+    setTasks(restTasks);
+  };
+
+  const changeTodoListFilter = (id: string, filter: FilterValuesType): void => {
     const updatedTodoLists = todoLists.map((tl) => (tl.id === id ? { ...tl, filter } : tl));
     setTodoLists(updatedTodoLists);
-  }
+  };
 
   //TODO: functions for task
   const addTask = (todoListID: string, title: string): void => {
@@ -114,7 +121,8 @@ const AppTodoList = (): JSX.Element | null => {
         addTask={addTask}
         removeTask={removeTask}
         changeTaskStatus={changeTaskStatus}
-        changeTodoListFilter={changeTodoListFilter}
+				removeTodoList = {removeTodoList}
+				changeTodoListFilter={changeTodoListFilter}
       />
     );
   });

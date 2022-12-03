@@ -25,3 +25,9 @@
 .is_done {
   opacity: 0.5;
 }
+
+.header_box {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+}

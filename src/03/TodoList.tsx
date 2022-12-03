@@ -15,6 +15,7 @@ type TodoListProps = {
   addTask: (todoListID: string, title: string) => void;
   removeTask: (todoListID: string, taskID: string) => void;
   changeTaskStatus: (todoListID: string, taskID: string, status: boolean) => void;
+  removeTodoList: (todoListID: string) => void;
   changeTodoListFilter: (todoListID: string, filter: FilterValuesType) => void;
 };
 
@@ -27,6 +28,7 @@ const TodoList: FC<TodoListProps> = (props) => {
     addTask,
     removeTask,
     changeTaskStatus,
+    removeTodoList,
     changeTodoListFilter,
   } = props;
 
@@ -35,7 +37,7 @@ const TodoList: FC<TodoListProps> = (props) => {
   return (
     <div>
       <AddItemForm addItem={addItem} />
-      <TodoListHeader title={title} />
+      <TodoListHeader todoListID={todoListID} title={title} removeTodoList={removeTodoList} />
       <TodoListTasks
         todoListID={todoListID}
         tasks={tasks}
