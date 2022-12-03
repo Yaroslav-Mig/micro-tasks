@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { v1 } from 'uuid';
 import s from './TodoList.module.css';
+
 import TodoList from './TodoList';
 import AddItemForm from './AddItemForm';
 
@@ -28,8 +29,8 @@ const getFilteredTasks = (tasks: TaskType[], filter: FilterValuesType): TaskType
       return tasks.filter((task) => task.isDone === false);
 
     case 'completed':
-      return tasks.filter((task) => task.isDone === true);
-
+			return tasks.filter((task) => task.isDone === true);
+		
     default:
       return tasks;
   }
@@ -62,15 +63,15 @@ const AppTodoList = (): JSX.Element | null => {
   });
 
   //TODO: functions for todoList
-	const addTodoList = (title: string): void => {
-		const todoListID = v1();
+  const addTodoList = (title: string): void => {
+    const todoListID = v1();
     const newTodoList: TodoListType = {
       id: todoListID,
       title: title,
       filter: 'all',
     };
-		setTodoLists([newTodoList, ...todoLists]);
-		setTasks({ ...tasks, [todoListID]: [] })
+    setTodoLists([newTodoList, ...todoLists]);
+    setTasks({ ...tasks, [todoListID]: [] });
   };
 
   function changeTodoListFilter(id: string, filter: FilterValuesType) {
@@ -120,7 +121,7 @@ const AppTodoList = (): JSX.Element | null => {
 
   return (
     <div className={s.App}>
-      <AddItemForm />
+      <AddItemForm addItem={addTodoList} />
       {mappedTodoLists}
     </div>
   );
