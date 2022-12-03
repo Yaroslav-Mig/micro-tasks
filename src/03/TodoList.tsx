@@ -1,6 +1,7 @@
-import React, { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, FC } from 'react';
 import s from './TodoList.module.css';
 import { FilterValuesType, TaskType } from './AppTodoList';
+import AddItemForm from './AddItemForm';
 
 type TodoListProps = {
   todoListID: string;
@@ -25,29 +26,11 @@ const TodoList: FC<TodoListProps> = (props) => {
     changeTaskStatus,
   } = props;
 
-  let [taskTitle, setTaskTitle] = useState('');
-  let [error, setError] = useState<string | null>(null);
-
-  const addTaskHandler = () => {
-    if (taskTitle.trim()) {
-      addTask(todoListID, taskTitle.trim());
-      setTaskTitle('');
-    } else {
-      setError('Title is required');
-    }
-  };
-
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setTaskTitle(e.currentTarget.value);
-  };
-
-  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    setError(null);
-    e.ctrlKey && e.key === 'Enter' && addTaskHandler();
-  };
   const onFilterHandler = (filter: FilterValuesType): void => {
     changeTodoListFilter(todoListID, filter);
   };
+
+	const addItem = (title: string): void => addTask(todoListID, title);
 
   const mappedTasks = tasks.map((task) => {
     const onRemoveHandler = () => removeTask(todoListID, task.id);
@@ -65,7 +48,6 @@ const TodoList: FC<TodoListProps> = (props) => {
     );
   });
 
-  const inputClass = error ? `${s.error}` : '';
   const allBtnClass = filter === 'all' ? `${s.active_filter}` : '';
   const activeBtnClass = filter === 'active' ? `${s.active_filter}` : '';
   const completedBtnClass = filter === 'completed' ? `${s.active_filter}` : '';
@@ -73,16 +55,7 @@ const TodoList: FC<TodoListProps> = (props) => {
   return (
     <div>
       <h3>{title}</h3>
-      <div>
-        <input
-          value={taskTitle}
-          className={inputClass}
-          onChange={onChangeHandler}
-          onKeyPress={onKeyPressHandler}
-        />
-        <button onClick={addTaskHandler}>+</button>
-        {error && <div className={s.error_message}>{error}</div>}
-      </div>
+      <AddItemForm addItem={addItem} />
       <ul>{mappedTasks}</ul>
       <div>
         <button className={allBtnClass} onClick={() => onFilterHandler('all')}>

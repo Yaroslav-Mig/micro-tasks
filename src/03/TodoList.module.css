@@ -11,6 +11,7 @@
 
 .error {
   border: red 1px solid;
+	outline: none;
 }
 
 .error_message {
