@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import s from './TodoList.module.css';
 
 import { FilterValuesType, TaskType } from './AppTodoList';
 
@@ -14,8 +15,10 @@ type TodoListProps = {
   filter: FilterValuesType;
   addTask: (todoListID: string, title: string) => void;
   removeTask: (todoListID: string, taskID: string) => void;
+  changeTaskTitle: (todoListID: string, taskID: string, title: string) => void;
   changeTaskStatus: (todoListID: string, taskID: string, status: boolean) => void;
   removeTodoList: (todoListID: string) => void;
+  changeTodoListTitle: (todoListID: string, title: string) => void;
   changeTodoListFilter: (todoListID: string, filter: FilterValuesType) => void;
 };
 
@@ -27,23 +30,35 @@ const TodoList: FC<TodoListProps> = (props) => {
     filter,
     addTask,
     removeTask,
+    changeTaskTitle,
     changeTaskStatus,
     removeTodoList,
+    changeTodoListTitle,
     changeTodoListFilter,
   } = props;
 
   const addItem = (title: string): void => addTask(todoListID, title);
 
   return (
-    <div>
+    <div className={s.container}>
       <AddItemForm addItem={addItem} />
-      <TodoListHeader todoListID={todoListID} title={title} removeTodoList={removeTodoList} />
-      <TodoListTasks
+      <TodoListHeader
         todoListID={todoListID}
-        tasks={tasks}
-        removeTask={removeTask}
-        changeTaskStatus={changeTaskStatus}
+        title={title}
+        removeTodoList={removeTodoList}
+        changeTodoListTitle={changeTodoListTitle}
       />
+      {tasks.length ? (
+        <TodoListTasks
+          todoListID={todoListID}
+          tasks={tasks}
+          removeTask={removeTask}
+          changeTaskTitle={changeTaskTitle}
+          changeTaskStatus={changeTaskStatus}
+        />
+      ) : (
+        <p>There are no tasks</p>
+      )}
       <ButtonsFilter
         todoListID={todoListID}
         filter={filter}

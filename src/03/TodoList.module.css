@@ -1,8 +1,14 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .App {
   padding: 30px;
   display: flex;
-	flex-flow: row wrap;
-	text-align: initial;
+  flex-flow: row wrap;
+  text-align: initial;
 }
 
 .App > div {
@@ -11,7 +17,7 @@
 
 .error {
   border: red 1px solid;
-	outline: none;
+  outline: none;
 }
 
 .error_message {
@@ -25,9 +31,22 @@
 .is_done {
   opacity: 0.5;
 }
-
+.container {
+	max-width: 250px;
+	width: 100%;
+}
 .header_box {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.tasks_box {
 	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+	justify-content: space-evenly;
+	max-width: 100%;
+}
+.editInput {
+	max-width: 150px;
 }
