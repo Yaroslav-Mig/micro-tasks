@@ -6,23 +6,21 @@ type CurrencyProps = {
 };
 
 export type MoneyType = {
-  banknots: string;
+  banknote: CurrencyType;
   value: number;
   number: string;
 };
-
-type CurrencyType = 'Dollars' | 'RUBLS';
-
+type CurrencyType = 'Dollar' | 'Euro';
 export type MoneyFilterType = 'all' | CurrencyType;
-
 type FuncType = () => void;
 
 export const Currency = (props: CurrencyProps) => {
-  const { money, setFilter } = props;
+	const { money, setFilter } = props;
+
   const mappedMoney = money.map((el) => {
     return (
       <li key={el.number}>
-        <span>{`${el.value} - ${el.banknots}`}</span>
+        <span>{`${el.value} - ${el.banknote}`}</span>
       </li>
     );
   });
@@ -35,8 +33,8 @@ export const Currency = (props: CurrencyProps) => {
     <>
       <ul>{mappedMoney}</ul>
       <button onClick={onClickFilterHandler('all')}>All</button>
-      <button onClick={onClickFilterHandler('Dollars')}>Dollars</button>
-      <button onClick={onClickFilterHandler('RUBLS')}>Rubles</button>
+      <button onClick={onClickFilterHandler('Dollar')}>Dollars</button>
+      <button onClick={onClickFilterHandler('Euro')}>Euro</button>
     </>
   );
 };

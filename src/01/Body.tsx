@@ -6,6 +6,16 @@ type BodyProps = {
   title: string;
 };
 
+const filterMoney = (array: Array<MoneyType>, filter: MoneyFilterType) => {
+	switch (filter) {
+		case 'Euro':
+		case 'Dollar':
+			return array.filter((el) => el.banknote === filter);
+		case 'all':
+			return array;
+	}
+};
+
 export const Body = (props: BodyProps) => {
   const students = [
     { id: 1, name: 'James', age: 8 },
@@ -28,33 +38,24 @@ export const Body = (props: BodyProps) => {
   ];
 
   const [money, setMoney] = useState<Array<MoneyType>>([
-    { banknots: 'Dollars', value: 100, number: ' a1234567890' },
-    { banknots: 'Dollars', value: 50, number: ' z1234567890' },
-    { banknots: 'RUBLS', value: 100, number: ' w1234567890' },
-    { banknots: 'Dollars', value: 100, number: ' e1234567890' },
-    { banknots: 'Dollars', value: 50, number: ' c1234567890' },
-    { banknots: 'RUBLS', value: 100, number: ' r1234567890' },
-    { banknots: 'Dollars', value: 50, number: ' x1234567890' },
-    { banknots: 'RUBLS', value: 50, number: ' v1234567890' },
+    { banknote: 'Dollar', value: 100, number: ' a1234567890' },
+    { banknote: 'Dollar', value: 50, number: ' z1234567890' },
+    { banknote: 'Euro', value: 100, number: ' w1234567890' },
+    { banknote: 'Dollar', value: 100, number: ' e1234567890' },
+    { banknote: 'Dollar', value: 50, number: ' c1234567890' },
+    { banknote: 'Euro', value: 100, number: ' r1234567890' },
+    { banknote: 'Dollar', value: 50, number: ' x1234567890' },
+    { banknote: 'Euro', value: 50, number: ' v1234567890' },
   ]);
   const [filter, setFilter] = useState<MoneyFilterType>('all');
-
-  const filterMoney = (array: Array<MoneyType>, filter: MoneyFilterType) => {
-    switch (filter) {
-      case 'all':
-        return array;
-      default:
-        return array.filter((el) => el.banknots === filter);
-    }
-  };
 
   const filteredMoney = filterMoney(money, filter);
 
   return (
     <div>
       <span>{props.title}</span>
-			<Students students={students} cars={topCars} />
-			<hr/>
+      <Students students={students} cars={topCars} />
+      <hr />
       <Currency money={filteredMoney} setFilter={setFilter} />
     </div>
   );
