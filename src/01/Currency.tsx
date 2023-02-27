@@ -1,23 +1,40 @@
-import React from 'react';
+import { useState } from 'react';
 
-type CurrencyProps = {
-  money: Array<MoneyType>;
-  setFilter: (filter: MoneyFilterType) => void;
-};
-
-export type MoneyType = {
+type MoneyType = {
   banknote: CurrencyType;
   value: number;
   number: string;
 };
 type CurrencyType = 'Dollar' | 'Euro';
-export type MoneyFilterType = 'all' | CurrencyType;
+type MoneyFilterType = 'all' | CurrencyType;
 type FuncType = () => void;
 
-export const Currency = (props: CurrencyProps) => {
-	const { money, setFilter } = props;
+const filterMoney = (array: Array<MoneyType>, filter: MoneyFilterType) => {
+  switch (filter) {
+    case 'Euro':
+    case 'Dollar':
+      return array.filter((el) => el.banknote === filter);
+    case 'all':
+      return array;
+  }
+};
 
-  const mappedMoney = money.map((el) => {
+export const Currency = () => {
+  const money: Array<MoneyType> = [
+    { banknote: 'Dollar', value: 100, number: ' a1234567890' },
+    { banknote: 'Dollar', value: 50, number: ' z1234567890' },
+    { banknote: 'Euro', value: 100, number: ' w1234567890' },
+    { banknote: 'Dollar', value: 100, number: ' e1234567890' },
+    { banknote: 'Dollar', value: 50, number: ' c1234567890' },
+    { banknote: 'Euro', value: 100, number: ' r1234567890' },
+    { banknote: 'Dollar', value: 50, number: ' x1234567890' },
+    { banknote: 'Euro', value: 50, number: ' v1234567890' },
+  ];
+
+  const [filter, setFilter] = useState<MoneyFilterType>('all');
+  const filteredMoney = filterMoney(money, filter);
+
+  const mappedMoney = filteredMoney.map((el) => {
     return (
       <li key={el.number}>
         <span>{`${el.value} - ${el.banknote}`}</span>

@@ -1,13 +1,13 @@
-import React from 'react';
+import { FC } from 'react';
 
 type ButtonProps = {
   name: string;
-  addMessage: () => void;
+  onClick: () => void;
 };
 
-export const Button = (props: ButtonProps) => {
-  const { name, addMessage } = props;
-  const onClickBtnHandler = () => addMessage();
+export const Button: FC<ButtonProps> = (props) => {
+	const { name, onClick } = props;
+  const btnHandler = () => onClick();
 
-  return <button onClick={onClickBtnHandler}>{name}</button>;
+  return <button onClick={btnHandler}>{name}</button>;
 };

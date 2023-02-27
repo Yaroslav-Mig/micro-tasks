@@ -21,7 +21,7 @@ function App() {
     { message: 'text 5' },
     { message: 'text 7' },
   ]);
-	const [title, setTitle] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
 
   const mappedMessages = messages.map((el, index) => {
     return <p key={index}>{el.message}</p>;
@@ -43,14 +43,14 @@ function App() {
     // };
     setMessages([...messages, { message }]);
   };
-	const addMessage2 = (message: string): void => setMessages2([...messages2, { message }]);
+  const addMessage2 = (message: string): void => setMessages2([...messages2, { message }]);
 
-	const onClickBtnHandler = () => {
-		if (title.trim()) {
-			addMessage2(title.trim());
-			setTitle('');
-		}
-	};
+  const onClickBtnHandler = () => {
+    if (title.trim()) {
+      addMessage2(title.trim());
+      setTitle('');
+    }
+  };
 
   return (
     <div className='App'>
@@ -69,10 +69,10 @@ function App() {
       <div>{mappedMessages}</div>
       <hr />
       <Input value={title} onChange={setTitle} />
-      <Button name={'+'} addMessage={onClickBtnHandler} />
-			<div>{mappedMessages2}</div>
-			<hr />
-			<AppTodoList/>
+      <Button name={'+'} onClick={onClickBtnHandler} />
+      <div>{mappedMessages2}</div>
+      <hr />
+      <AppTodoList />
     </div>
   );
 }
