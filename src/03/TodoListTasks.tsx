@@ -3,6 +3,7 @@ import s from './TodoList.module.css';
 
 import { TaskType } from './AppTodoList';
 import EditableSpan from './EditableSpan';
+import { Button } from '../02/Button';
 
 type TodoListTasksProps = {
   todoListID: string;
@@ -28,7 +29,7 @@ const TodoListTasks: FC<TodoListTasksProps> = (props) => {
       <li key={task.id} className={taskStatusClass}>
         <input type='checkbox' checked={task.isDone} onChange={onStatusHandler} />
         <EditableSpan title={task.title} setNewTitle={changeTitleHandler} />
-        <button onClick={onRemoveHandler}>x</button>
+        <Button name='x' onClick={onRemoveHandler} />
       </li>
     );
   });

@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import EditableSpan from './EditableSpan';
 import s from './TodoList.module.css';
+
+import { Button } from '../02/Button';
+import EditableSpan from './EditableSpan';
 
 type TodoListHeaderProps = {
   todoListID: string;
@@ -20,7 +22,7 @@ const TodoListHeader: FC<TodoListHeaderProps> = (props) => {
       <h3>
         <EditableSpan title={title} setNewTitle={changeTitleHandler} />
       </h3>
-      <button onClick={removeHandler}>X</button>
+      <Button name='X' onClick={removeHandler} />
     </div>
   );
 };

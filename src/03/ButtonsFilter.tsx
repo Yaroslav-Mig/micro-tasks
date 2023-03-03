@@ -2,6 +2,7 @@ import { FC } from 'react';
 import s from './TodoList.module.css';
 
 import { FilterValuesType } from './AppTodoList';
+import { Button } from '../02/Button';
 
 type ButtonsFilterProps = {
   todoListID: string;
@@ -20,15 +21,9 @@ const ButtonsFilter: FC<ButtonsFilterProps> = ({ todoListID, filter, changeTodoL
 
   return (
     <div>
-      <button className={allBtnClass} onClick={() => onFilterHandler('all')}>
-        All
-      </button>
-      <button className={activeBtnClass} onClick={() => onFilterHandler('active')}>
-        Active
-      </button>
-      <button className={completedBtnClass} onClick={() => onFilterHandler('completed')}>
-        Completed
-      </button>
+      <Button styleCSS={allBtnClass} name='All' onClick={() => onFilterHandler('all')}/>
+      <Button styleCSS={activeBtnClass} name='Active' onClick={() => onFilterHandler('active')}/>
+      <Button styleCSS={completedBtnClass} name='Completed' onClick={() => onFilterHandler('completed')}/>
     </div>
   );
 };
