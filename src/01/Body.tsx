@@ -12,7 +12,8 @@ export const Body = (props: BodyProps) => {
       <span>{props.title}</span>
       <Students />
       <hr />
-      <Currency />
+			<Currency />
+			<hr />
       <Albums />
     </div>
   );

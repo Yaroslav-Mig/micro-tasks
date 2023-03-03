@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 
 type MoneyType = {
   banknote: CurrencyType;
@@ -8,6 +9,31 @@ type MoneyType = {
 type CurrencyType = 'Dollar' | 'Euro';
 type MoneyFilterType = 'all' | CurrencyType;
 type FuncType = () => void;
+
+interface BanknoteProps {
+  $color?: string;
+}
+
+const Banknote = styled.li<BanknoteProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 150px;
+  min-height: 100px;
+  background-color: ${(props) => `hsl(${props.$color || '0, 0%, 90%'})`};
+
+  & span {
+    font: 1.5rem Arial, Helvetica, sans-serif;
+  }
+`;
+
+const BoxList = styled.ul`
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+  gap: 10px;
+  list-style: none;
+`;
 
 const filterMoney = (array: Array<MoneyType>, filter: MoneyFilterType) => {
   switch (filter) {
@@ -35,10 +61,12 @@ export const Currency = () => {
   const filteredMoney = filterMoney(money, filter);
 
   const mappedMoney = filteredMoney.map((el) => {
+    const banknoteColor: string = el.banknote === 'Dollar' ? '150, 100%, 40%' : '60, 100%, 85%';
+
     return (
-      <li key={el.number}>
+      <Banknote key={el.number} $color={banknoteColor}>
         <span>{`${el.value} - ${el.banknote}`}</span>
-      </li>
+      </Banknote>
     );
   });
 
@@ -48,10 +76,12 @@ export const Currency = () => {
 
   return (
     <>
-      <ul>{mappedMoney}</ul>
-      <button onClick={onClickFilterHandler('all')}>All</button>
-      <button onClick={onClickFilterHandler('Dollar')}>Dollars</button>
-      <button onClick={onClickFilterHandler('Euro')}>Euro</button>
+      <BoxList>{mappedMoney}</BoxList>
+      <div>
+        <button onClick={onClickFilterHandler('all')}>All</button>
+        <button onClick={onClickFilterHandler('Dollar')}>Dollars</button>
+        <button onClick={onClickFilterHandler('Euro')}>Euro</button>
+      </div>
     </>
   );
 };
