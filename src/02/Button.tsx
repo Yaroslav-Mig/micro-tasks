@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 type ButtonProps = {
 	name: string;
 	styleCSS?: string;
+	children?: ReactNode;
   onClick: () => void;
 };
 

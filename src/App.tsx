@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
+
 import { Header } from './01/Header';
 import { Body } from './01/Body';
 import { Footer } from './01/Footer';
@@ -9,6 +10,7 @@ import { FullInput, MessagesType } from './02/FullInput';
 import { Input } from './02/Input';
 import { Button } from './02/Button';
 import AppTodoList from './03/AppTodoList';
+import { Site } from './site/Site';
 
 function App() {
   const [messages, setMessages] = useState<Array<MessagesType>>([
@@ -72,7 +74,8 @@ function App() {
       <Button name={'+'} onClick={onClickBtnHandler} />
       <div>{mappedMessages2}</div>
       <hr />
-      <AppTodoList />
+			<AppTodoList />
+			<Site/>
     </div>
   );
 }
