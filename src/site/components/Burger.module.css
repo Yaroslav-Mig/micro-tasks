@@ -1,0 +1,50 @@
+.box {
+  position: absolute;
+  top: 50%;
+	transform: translateY(-50%);
+  right: 3%;
+}
+
+.input {
+  display: none;
+  appearance: none;
+}
+
+.wrapper-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 33px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.line {
+  width: 100%;
+  height: 4px;
+  border-radius: 5px/3px;
+  background-color: hsl(0, 0%, 85%);
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+}
+
+.line:first-child {
+  transform-origin: -2px 0%;
+}
+
+.line:last-child {
+  transform-origin: -1px 100%;
+}
+
+.input:checked ~ .wrapper-lines > .line:first-child {
+  transform: rotate(45deg);
+}
+
+.input:checked ~ .wrapper-lines > .line:nth-child(2) {
+  opacity: 0;
+	transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+.input:checked ~ .wrapper-lines > .line:last-child {
+  transform: rotate(-45deg);
+}

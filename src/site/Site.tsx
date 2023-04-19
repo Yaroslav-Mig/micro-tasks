@@ -19,8 +19,6 @@ export const dataState: DataStateType = {
   ],
 };
 
-test()
-
 export const Site = () => {
   return (
     <BrowserRouter>
