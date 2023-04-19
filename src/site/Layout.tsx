@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import css from './Site.module.css';
 
-import { DataStateType } from './Site';
 import { useWindowSize } from './hooks/useWindowSize';
+import { useToggle } from './hooks/useToggle';
+
+import { DataStateType } from './Site';
 import Burger from './components/Burger';
 
 export const Layout = ({ pages }: DataStateType) => {
-  const [menu, setMenu] = useState<boolean>(true);
+	const [menu, setMenu] = useToggle(true) as [boolean, () => void];
+
+	const { width } = useWindowSize() as { width: number };
+	const resolution = 768;
 
   const classNavLink = ({ isActive }: { isActive: boolean }): string | undefined => {
     return isActive ? `${css['nav-list__item']} ${css.active}` : `${css['nav-list__item']}`;
   };
-
-  const { width } = useWindowSize() as { width: number };
-  const resolution = 768;
 
   const linkList: JSX.Element[] = pages.map((page, inx) => {
     return (
@@ -26,12 +28,12 @@ export const Layout = ({ pages }: DataStateType) => {
 
   useEffect(() => {
     if (!menu && width > resolution) {
-      setMenu(true);
+      setMenu();
     }
     if (menu && width < resolution) {
-      setMenu(false);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+      setMenu();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width]);
 
   return (
